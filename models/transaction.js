@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const transactionSchema = mongoose.Schema({
   transID: {
     type: Number,
-    required: true
+    required: true,
+    unique: true
   },
   borrowerId: {
     type: String,
@@ -11,7 +12,8 @@ const transactionSchema = mongoose.Schema({
   },
   ISBN: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   issueDate: {
     type: Date,

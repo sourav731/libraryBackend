@@ -3,11 +3,8 @@ const mongoose = require("mongoose");
 const borrowerSchema = mongoose.Schema({
   cardNumber: {
     type: String,
-    required: true
-  },
-  isStudent: {
-    flag: Boolean,
-    require: true
+    required: true,
+    unique: true
   },
   dateOfMembership: {
     type: Date,
@@ -18,7 +15,7 @@ const borrowerSchema = mongoose.Schema({
     require: true
   },
   borrowerName: {
-    type: Number,
+    type: String,
     require: true
   },
   phoneNumber: {

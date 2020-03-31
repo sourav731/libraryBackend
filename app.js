@@ -16,6 +16,10 @@ app.use("/loginStudent", studentLogin);
 const bookStore = require("./routes/bookStore");
 app.use("/bookStore", bookStore);
 
+//student database page
+const studentMember = require("./routes/studentMember");
+app.use("/borrower", studentMember);
+
 //ROUTES
 app.get("/", (req, res) => {
   res.send("Connected");

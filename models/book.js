@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const bookSchema = mongoose.Schema({
   ISBN: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   Author: {
     type: String,
@@ -27,7 +28,8 @@ const bookSchema = mongoose.Schema({
   },
   AccessionNo: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   DateOfPurchase: {
     type: Date,

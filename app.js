@@ -8,8 +8,13 @@ require("dotenv/config");
 app.use(bodyParser.json());
 
 //IMPORT ROUTES
+//student login page
 const studentLogin = require("./routes/studentLogin");
 app.use("/loginStudent", studentLogin);
+
+//book store page
+const bookStore = require("./routes/bookStore");
+app.use("/bookStore", bookStore);
 
 //ROUTES
 app.get("/", (req, res) => {
@@ -20,7 +25,7 @@ app.get("/", (req, res) => {
 //CONNECT TO DATABASE
 mongoose.connect(
   process.env.DB_CONNECTION,
-  { useNewUrlParser: true, useUnifiedTopology: true },
+  { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true },
   console.log("connected to DB!")
 );
 

@@ -21,14 +21,14 @@ router.get("/books", async (req, res) => {
 router.post("/", async (req, res) => {
   const books = new bookSchema({
     ISBN: req.body.ISBN,
-    Author: req.body.Author,
-    Title: req.body.Title,
+    Author: req.body.Author.toLowerCase(),
+    Title: req.body.Title.toLowerCase(),
     Price: req.body.Price,
     ClassNo: req.body.ClassNo,
     BookNo: req.body.BookNo,
     AccessionNo: req.body.AccessionNo,
     DateOfPurchase: req.body.DateOfPurchase,
-    Edition: req.body.Edition
+    Edition: req.body.Edition,
   });
 
   try {
@@ -71,7 +71,7 @@ router.patch("/update/:ISBN", async (req, res) => {
     BookNo: req.body.BookNo,
     AccessionNo: req.body.AccessionNo,
     DateOfPurchase: req.body.DateOfPurchase,
-    Edition: req.body.Edition
+    Edition: req.body.Edition,
   };
 
   try {
@@ -84,6 +84,48 @@ router.patch("/update/:ISBN", async (req, res) => {
     res.send("updated book in book store");
   } catch (err) {
     res.json({ message: err });
+  }
+});
+
+//find book using book name
+router.get("/findBookName", async (req, res) => {
+  try {
+    const requiredBook = await bookSchema.find({
+      Title: req.body.Title.toLowerCase(),
+    });
+    res.send(requiredBook);
+    console.log(requiredBook);
+  } catch (err) {
+    res.json({ message: err });
+    console.log(err);
+  }
+});
+
+//find using author name
+router.get("/findAuthorName", async (req, res) => {
+  try {
+    const requiredBook = await bookSchema.find({
+      Author: req.body.Author.toLowerCase(),
+    });
+    res.send(requiredBook);
+    console.log(requiredBook);
+  } catch (err) {
+    res.json({ message: err });
+    console.log(err);
+  }
+});
+
+//find using partial book name
+router.get("/findPartialBookName", async (req, res) => {
+  try {
+    const requiredBook = await bookSchema.find({
+      Title: { $regex: req.body.Title.toLowerCase(), $options: "i" },
+    });
+    res.send(requiredBook);
+    console.log(requiredBook);
+  } catch (err) {
+    res.json({ message: err });
+    console.log(err);
   }
 });
 
